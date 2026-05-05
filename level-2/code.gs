@@ -1,5 +1,5 @@
-function doGet() {
-  return HtmlService.createTemplateFromFile('Index').evaluate();
+function doGet(e) {
+  return HtmlService.createTemplateFromFile('index').evaluate();
 }
 
 
@@ -17,9 +17,11 @@ function processForm(formObject){
 
 //SEARCH FOR MATCHED CONTENTS 
 function search(searchtext){
-  var spreadsheetId   = '##################@@@@@@@@@@@@@@@@##########@@@@@@@@@@@@@@@@'; //** CHANGE !!!
-  var dataRage        = 'Data!B1:B';                                    //** CHANGE !!!
-  var data = Sheets.Spreadsheets.Values.get(spreadsheetId, dataRage).values;
+  var spreadsheetId   = '---------------------------------------'; //** CHANGE !!!
+  var dataRange        = 'Almacen!B2:J';                                    //** CHANGE !!!
+  var data = SpreadsheetApp.openById(spreadsheetId)
+             .getRange(dataRange)
+             .getValues();
   var ar = [];
   console.log(data);
   data.forEach(function(f) {
@@ -39,9 +41,12 @@ function search(searchtext){
 
 
 function search_fail(){
-  var spreadsheetId   = '##################@@@@@@@@@@@@@@@@##########@@@@@@@@@@@@@@@@'; //** CHANGE !!!
-  var dataRage        = 'Data!B1:B';                                    //** CHANGE !!!
-  var data = Sheets.Spreadsheets.Values.get(spreadsheetId, dataRage).values;
+  var spreadsheetId   = '---------------------------------------'; //** CHANGE !!!
+  var dataRange        = 'Almacen!B2:B';                                    //** CHANGE !!!
+  var data = SpreadsheetApp.openById(spreadsheetId)
+             .getRange(dataRange)
+             .getValues();
+//  const valor = sheet.getRange("A1:A13").getValues();
   var ar = [];
   var abc = "1236547890=-_+;'.,.<></?:"
   data.forEach(function(f) {
@@ -57,4 +62,3 @@ function search_fail(){
   });
   return ar;
 }
-search_fail()
